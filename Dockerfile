@@ -30,7 +30,7 @@ WORKDIR /userdata
 
 RUN yum -y update && \
 	yum -y remove jq && \
-	yum -y install openssh-clients qemu-kvm && \
+	#yum -y install openssh-clients qemu-kvm && \
 	yum -y clean all
 
 COPY --from=executor-img /coreos_production_qemu_image.qcow2 /userdata/coreos_production_qemu_image.qcow2
