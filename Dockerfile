@@ -4,7 +4,7 @@ ARG location
 
 RUN [ -z "${channel}" ] && echo "ARG channel is required" && exit 1 || true
 
-RUN apt install jq xz
+RUN yum -y install jq xz
 RUN ARCH=$(uname -m) ; echo $ARCH \
 	; curl https://builds.coreos.fedoraproject.org/streams/${channel}.json -o stable.json && \
 		cat stable.json | jq -r --arg arch "$ARCH" '.architectures[$arch].artifacts.qemu.release'
