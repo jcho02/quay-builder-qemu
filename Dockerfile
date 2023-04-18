@@ -22,7 +22,6 @@ RUN if [[ -z "$arg" ]] ; then \
 	echo "Downloading" $(cat stable.json | jq -r --arg arch "$ARCH" '.architectures[$arch].artifacts.qemu.formats."qcow2.xz".disk.location') && \
 	curl -s -o coreos_production_qemu_image.qcow2.xz $(cat stable.json | jq -r --arg arch "$ARCH" '.architectures[$arch].artifacts.qemu.formats."qcow2.xz".disk.location') && \
 		unxz coreos_production_qemu_image.qcow2.xz ; \
-	; fi
 	else \
 	echo "Downloading" ${location} && \
 	curl -s -o coreos_production_qemu_image.qcow2.xz ${location} && unxz coreos_production_qemu_image.qcow2.xz \
