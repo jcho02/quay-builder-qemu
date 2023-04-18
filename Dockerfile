@@ -13,7 +13,6 @@ RUN ARCH=$(uname -m) ; echo $ARCH \
 FROM base AS executor-img
 
 RUN if [[ -z "$arg" ]] ; then \
-	ARCH="ppc64le" ; echo $ARCH ;
 	echo "Downloading" && \
 	curl -s -o https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/36.20220906.3.1/ppc64le/fedora-coreos-36.20220906.3.1-qemu.ppc64le.qcow2.xz && \
 	unxz https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/36.20220906.3.1/ppc64le/fedora-coreos-36.20220906.3.1-qemu.ppc64le.qcow2.xz ; \
