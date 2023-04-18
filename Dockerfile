@@ -18,10 +18,10 @@ RUN if [[ -z "$arg" ]] ; then \
 		echo "Downloading" && \
 		curl -s -o https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/36.20220906.3.1/ppc64le/fedora-coreos-36.20220906.3.1-qemu.ppc64le.qcow2.xz && \
 		unxz https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/36.20220906.3.1/ppc64le/fedora-coreos-36.20220906.3.1-qemu.ppc64le.qcow2.xz; \
-	else \
-	echo "Downloading" $(cat stable.json | jq -r --arg arch "$ARCH" '.architectures[$arch].artifacts.qemu.formats."qcow2.xz".disk.location') && \
-	curl -s -o coreos_production_qemu_image.qcow2.xz $(cat stable.json | jq -r --arg arch "$ARCH" '.architectures[$arch].artifacts.qemu.formats."qcow2.xz".disk.location') && \
-		unxz coreos_production_qemu_image.qcow2.xz ; \
+	elif [[ $ARCH == "x86_64" || $ARCH == "s390x" ]] ;  \
+		echo "Downloading" $(cat stable.json | jq -r --arg arch "$ARCH" '.architectures[$arch].artifacts.qemu.formats."qcow2.xz".disk.location') && \
+		curl -s -o coreos_production_qemu_image.qcow2.xz $(cat stable.json | jq -r --arg arch "$ARCH" '.architectures[$arch].artifacts.qemu.formats."qcow2.xz".disk.location') && \
+			unxz coreos_production_qemu_image.qcow2.xz ; \
 	else \
 	echo "Downloading" ${location} && \
 	curl -s -o coreos_production_qemu_image.qcow2.xz ${location} && unxz coreos_production_qemu_image.qcow2.xz \
